@@ -16,9 +16,10 @@ Driver and install script for the custom DDPlayer DAC board on Moode Audio.
 
 ## Installation
 
-### 1. Clone the repository
+### 1. Install git and clone the repository
 
 ```bash
+sudo apt-get install -y git
 git clone https://github.com/dtektoni-bit/ddplayer-moode.git
 cd ddplayer-moode
 ```
@@ -31,7 +32,7 @@ sudo ./install.sh
 ```
 
 The script will automatically:
-- Install build dependencies
+- Install build dependencies (git, gcc, make, flex, bison, libssl-dev, bc)
 - Install kernel headers for the running kernel
 - Compile and install the kernel module (`.ko`)
 - Compile and install the device tree overlay (`.dtbo`)
@@ -48,6 +49,10 @@ Open `http://moode.local` in a browser:
 
 **Step 2** — after reboot: Configure → Audio → Audio Output → MPD
 - Audio Output Device → select `snd_rpi_ddplayer_dac`
+- Click Save
+
+**Step 3** — Configure → Renderers
+- Enable UPnP Client for MPD
 - Click Save
 
 ## Kernel updates
