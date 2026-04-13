@@ -23,6 +23,7 @@
 #include <sys/time.h>
 #include <time.h>
 #include <unistd.h>
+#include <linux/i2c-dev.h>
 
 // i2c file descriptor for opeping i2c device
 static int i2c_fd = 0;
