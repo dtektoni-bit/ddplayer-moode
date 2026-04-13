@@ -24,6 +24,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <linux/i2c-dev.h>
+#include <i2c/smbus.h>
 
 // i2c file descriptor for opeping i2c device
 static int i2c_fd = 0;
