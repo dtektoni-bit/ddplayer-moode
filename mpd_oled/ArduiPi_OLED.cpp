@@ -347,8 +347,7 @@ boolean ArduiPi_OLED::select_oled(uint8_t OLED_TYPE, int8_t i2c_addr)
     return false;
 
   // Init Raspberry PI GPIO
-  if (!bcm2835_init())
-    return false;
+  bcm2835_init();
     
   return true;
   
