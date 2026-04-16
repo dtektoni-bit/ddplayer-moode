@@ -103,3 +103,6 @@ except:
     print("ddplayer_oled.py не найден — настройки не сохранены")
 
 device.cleanup()
+# Запускаем сервис обратно
+subprocess.run(["sudo", "systemctl", "start", "ddplayer-oled"], capture_output=True)
+print("Сервис запущен.")
