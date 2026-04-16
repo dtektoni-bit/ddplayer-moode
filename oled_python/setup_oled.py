@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
+import subprocess
+import re
 from luma.core.interface.serial import i2c
 from luma.oled.device import sh1106, ssd1306, ssd1309
 from PIL import ImageFont, Image, ImageDraw
 
-fBold = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-fReg  = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+subprocess.run(["sudo", "systemctl", "stop", "ddplayer-oled"], capture_output=True)
+
+fBold = "/usr/share/fonts/truetype/Monocraft.ttf"
+fReg  = "/usr/share/fonts/truetype/Monocraft.ttf"
 
 DISPLAY_TYPES = [
     {"name": "Вариант 1 — sh1106",  "type": "sh1106",  "cls": sh1106},
@@ -38,7 +42,6 @@ def show_test(device, contrast, font_large, font_small, label):
     device.display(img.convert(device.mode))
     print(f"  {label}")
 
-# ШАГ 1 — тип дисплея
 print("=== Шаг 1: Тип дисплея ===")
 device = None
 for i, d in enumerate(DISPLAY_TYPES):
@@ -58,7 +61,6 @@ except: pass
 device = make_device(best_type["cls"])
 print(f"Выбрано: {best_type['name']}\n")
 
-# ШАГ 2 — контраст
 print("=== Шаг 2: Контраст ===")
 for i, c in enumerate(CONTRAST_VARIANTS):
     show_test(device, c, 20, 9, f"Вариант {i+1} — contrast={c} ({i+1}/{len(CONTRAST_VARIANTS)})")
@@ -70,7 +72,6 @@ choice = input("\nВведи номер лучшего варианта: ")
 best_contrast = CONTRAST_VARIANTS[int(choice)-1]
 print(f"Выбрано: contrast={best_contrast}\n")
 
-# ШАГ 3 — размер шрифта
 print("=== Шаг 3: Размер шрифта ===")
 for i, f in enumerate(FONT_VARIANTS):
     show_test(device, best_contrast, f["font_large"], f["font_small"],
@@ -83,26 +84,24 @@ choice = input("\nВведи номер лучшего варианта: ")
 best_fonts = FONT_VARIANTS[int(choice)-1]
 print(f"Выбрано: font_large={best_fonts['font_large']} font_small={best_fonts['font_small']}\n")
 
-# Записываем в ddplayer_oled.py
 try:
-    import re
-    with open("ddplayer_oled.py", "r") as f:
+    with open("/home/moode/ddplayer_oled.py", "r") as f:
         content = f.read()
     content = re.sub(r'DISPLAY_TYPE\s*=\s*"[^"]*"',  f'DISPLAY_TYPE     = "{best_type["type"]}"',       content)
     content = re.sub(r'DISPLAY_CONTRAST\s*=\s*\d+',   f'DISPLAY_CONTRAST = {best_contrast}',             content)
     content = re.sub(r'FONT_LARGE\s*=\s*\d+',         f'FONT_LARGE       = {best_fonts["font_large"]}',  content)
     content = re.sub(r'FONT_SMALL\s*=\s*\d+',         f'FONT_SMALL       = {best_fonts["font_small"]}',  content)
-    with open("ddplayer_oled.py", "w") as f:
+    with open("/home/moode/ddplayer_oled.py", "w") as f:
         f.write(content)
-    print("Готово! Настройки сохранены в ddplayer_oled.py")
+    print("Готово! Настройки сохранены.")
     print(f"  DISPLAY_TYPE     = {best_type['type']}")
     print(f"  DISPLAY_CONTRAST = {best_contrast}")
     print(f"  FONT_LARGE       = {best_fonts['font_large']}")
     print(f"  FONT_SMALL       = {best_fonts['font_small']}")
-except:
-    print("ddplayer_oled.py не найден — настройки не сохранены")
+except Exception as e:
+    print(f"Ошибка: {e}")
 
 device.cleanup()
-# Запускаем сервис обратно
+
 subprocess.run(["sudo", "systemctl", "start", "ddplayer-oled"], capture_output=True)
 print("Сервис запущен.")
