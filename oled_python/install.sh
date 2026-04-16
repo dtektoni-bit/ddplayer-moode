@@ -17,6 +17,11 @@ cp "$SCRIPT_DIR/ddplayer_oled.py" /home/moode/
 cp "$SCRIPT_DIR/setup_oled.py" /home/moode/
 cp "$SCRIPT_DIR/adafruit_font.py" /home/moode/
 
+echo "Устанавливаем права..."
+chown moode:moode /home/moode/ddplayer_oled.py
+chown moode:moode /home/moode/setup_oled.py
+chown moode:moode /home/moode/adafruit_font.py
+
 echo "Устанавливаем сервис..."
 sudo cp "$SCRIPT_DIR/ddplayer-oled.service" /etc/systemd/system/
 sudo systemctl daemon-reload
