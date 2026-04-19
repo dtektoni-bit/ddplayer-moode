@@ -13,8 +13,10 @@ Replaces the original C++ mpd_oled which is incompatible with 64-bit aarch64 ker
 
 - **STOP screen** — time, date, IP address, digital filter, input source
 - **PLAY screen** — samplerate, format, artist, title/album scrolling, progress bar, remaining time
-- **Spotify screen** — artist, title, album, progress bar, play/pause state
+- **RADIO screen** — station name, current track, bitrate
+- **Spotify screen** — artist, title, album, progress bar, play/pause state, remaining time
 - Auto-switch to STOP screen when input is OPTICAL or COAX
+- Screensaver — snake game after 3 minutes of inactivity
 - Interactive display setup: type, contrast, font size
 
 ## Install
@@ -51,12 +53,14 @@ sudo bash ~/ddplayer-moode/oled_python/uninstall.sh
 - python-mpd2
 - RPi.GPIO
 - Pillow
+- Monocraft font
 
-## Repository
+## Files
 
 | File | Purpose |
 |------|---------|
 | ddplayer_oled.py | Main display script |
+| screensaver.py | Snake screensaver |
 | setup_oled.py | Interactive configuration |
 | install.sh | Installation script |
 | uninstall.sh | Uninstallation script |
