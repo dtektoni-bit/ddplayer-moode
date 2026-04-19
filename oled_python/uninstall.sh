@@ -10,8 +10,10 @@ rm -f /home/moode/ddplayer_oled.py
 rm -f /home/moode/setup_oled.py
 rm -f /home/moode/adafruit_font.py
 rm -f /home/moode/make_font.py
+rm -f /home/moode/screensaver.py
+rm -f /home/moode/ddplayer_oled.conf
 
 sudo rm -f /usr/share/fonts/truetype/Monocraft.ttf
 sudo fc-cache -f
 
-echo "=== uninstalled ==="
+echo "=== Uninstalled ==="
