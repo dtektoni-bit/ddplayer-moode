@@ -53,7 +53,8 @@ sudo bash ~/ddplayer-moode/oled_python/uninstall.sh
 - python-mpd2
 - RPi.GPIO
 - Pillow
-- Monocraft font
+- Monocraft font (downloaded during install)
+- Unifont (apt package, installed automatically)
 
 ## Files
 
