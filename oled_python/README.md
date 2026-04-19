@@ -66,3 +66,4 @@ sudo bash ~/ddplayer-moode/oled_python/uninstall.sh
 | uninstall.sh | Uninstallation script |
 | adafruit_font.py | Adafruit 5x7 bitmap font |
 | ddplayer-oled.service | systemd service |
+| make_font.py | Generates adafruit_font.py from glcdfont.c (run once) |
