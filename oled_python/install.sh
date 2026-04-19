@@ -4,7 +4,7 @@ echo "=== DDPlayer OLED installer ==="
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo "Installing dependencies..."
-sudo apt install -y python3-pip python3-pil i2c-tools
+sudo apt install -y python3-pip python3-pil i2c-tools fonts-unifont
 pip3 install luma.oled python-mpd2 RPi.GPIO --break-system-packages
 
 echo "Downloading font..."
