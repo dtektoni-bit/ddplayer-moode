@@ -25,6 +25,13 @@ Replaces the original C++ mpd_oled which is incompatible with 64-bit aarch64 ker
 git clone https://github.com/dtektoni-bit/ddplayer-moode.git
 sudo bash ~/ddplayer-moode/oled_python/install.sh
 ```
+## Important: Enable Metadata file
+
+For Spotify and other renderers to show on the display, you must enable the Metadata file in moOde:
+
+**Menu → Configure → Audio → MPD Options → Metadata file → ON**
+
+Without this setting the display will not detect Spotify, AirPlay or other renderer activity.
 
 ## Reconfigure display
 
